@@ -21,6 +21,8 @@ require("dotenv").config();
 
 	const client = await mongodb.MongoClient.connect(connectionString, options);
 
+	console.info('Conexão estabelecida com o MongoDB Atlas')
+
 	const db = client.db("blue_db");
 	const personagens = db.collection("personagens");
 
