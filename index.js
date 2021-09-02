@@ -5,7 +5,7 @@ require("dotenv").config();
 
 (async () => {
 	const dbUser = process.env.DB_USER;
-	const dbSenha = process.env.DB_SENHA;
+	const dbPassword = process.env.DB_PASSWORD;
 	const dbName = process.env.DB_NAME;
 	const dbChar = process.env.DB_CHAR;
 
@@ -13,7 +13,7 @@ require("dotenv").config();
 	app.use(express.json());
 
 	const port = process.env.PORT || 3000;
-	const connectionString = `mongodb+srv://${dbUser}:${dbSenha}@cluster0.${dbChar}.mongodb.net/${dbName}?retryWrites=true&w=majority`;
+	const connectionString = `mongodb+srv://${dbUser}:${dbPassword}@cluster0.${dbChar}.mongodb.net/${dbName}?retryWrites=true&w=majority`;
 
 	const options = {
 		useUnifiedTopology: true,
