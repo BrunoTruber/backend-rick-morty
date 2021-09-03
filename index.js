@@ -69,8 +69,8 @@ require("dotenv").config();
 		const objeto = req.body;
 
 		if (!objeto || !objeto.nome || !objeto.imagemUrl) {
-			res.send(
-				"Requisição inválida, certifique-se que tenha os campos nome e imagemUrl"
+			res.status(400).send(
+				{error: "Requisição inválida, certifique-se que tenha os campos nome e imagemUrl"}
 			);
 			return;
 		}
