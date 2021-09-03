@@ -2,6 +2,8 @@ const express = require("express");
 const mongodb = require("mongodb");
 const ObjectId = mongodb.ObjectId;
 require("dotenv").config();
+require("express-async-errors");
+
 
 (async () => {
 	const dbUser = process.env.DB_USER;
@@ -151,6 +153,25 @@ require("dotenv").config();
 
 
 	});
+	//Tratamento de erros
+	//Middleware verificar endpoints
+	app.all("*", function (req, res) {
+		res.status(404).send({ message: "Endpoint was not found" });
+	});
+
+	//Middleware -> Tratamento de erro
+	app.use((error, req, res, next) => {
+		res.status(error.status || 500).send({
+			error: {
+				status: error.status || 500,
+				message: error.message || "Internal Server Error",
+			},
+		});
+	});
+
+
+
+
 
 	app.listen(port, () => {
 		console.info(`App rodando em http://localhost:${port}`);
