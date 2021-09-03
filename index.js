@@ -78,13 +78,13 @@ require("dotenv").config();
 		const result = await personagens.insertOne(objeto);
 
 		console.log(result)
-
+		//se ocorrer algum erro com o mongo esse if vai detectar
 		if (result.acknowledged == false) {
-			res.send("Ocorreu um erro");
+			res.status(500).send({error: "Ocorreu um erro"});
 			return;
 		}
 
-		res.send(objeto);
+		res.status(201).send(objeto);
 	});
 
 	//[PUT] Atualizar personagem
@@ -93,8 +93,8 @@ require("dotenv").config();
 		const objeto = req.body;
 
 		if (!objeto || !objeto.nome || !objeto.imagemUrl) {
-			res.send(
-				"Requisição inválida, certifique-se que tenha os campos nome e imagemUrl"
+			res.status(400).send(
+				{error: "Requisição inválida, certifique-se que tenha os campos nome e imagemUrl"}
 			);
 			return;
 		}
@@ -104,7 +104,7 @@ require("dotenv").config();
 		});
 
 		if(quantidadePersonagens !== 1){
-			res.send('personagem nao encontrado')
+			res.status(404).send({error: 'personagem nao encontrado'})
 		}
 
 		const result = await personagens.updateOne(
@@ -117,10 +117,11 @@ require("dotenv").config();
 			);
 			//console.log(result)
 			//se acontecer algum erro no mongodb, cai na seguinte validação
-			if(result.modifiedCount !==1){
-				res.send('ocorreu um erro ao atualizar o personagem')
+			if(result.acknowledged == 'undefined'){
+				res.status(500).send({error: 'ocorreu um erro ao atualizar o personagem'})
 				return;
 			}
+			res.send(await getPersonagemById(id));
 	});
 
 	//[DELETE] Deleta um personagem
@@ -133,13 +134,20 @@ require("dotenv").config();
 
 		//checa se existe o personagem solicitado
 		if(quantidadePersonagens !==1){
-			res.send('personagem nao encontrado')
+			res.status(404).send({error: 'personagem nao encontrado'})
 		
 		}
 		//dleta personagem
 		const result = await personagens.deleteOne({
 			_id: ObjectId(id),
 		});
+		//se nao conseguue deletar, erro do mongo
+		if(result.deletedCount !== 1) {
+				res.status(500).send({error:"Ocorreu um erro ao remover o personagem"});
+			return;
+		}
+
+		res.send(204);
 
 
 	});
