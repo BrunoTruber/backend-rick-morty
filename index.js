@@ -47,7 +47,7 @@ require("express-async-errors");
 		next();
 	});
 
-	app.get("/", (req, res) => {
+	app.get("/", async (req, res) => {
 		res.send({ info: "Olá, Blue" });
 	});
 
