@@ -35,7 +35,7 @@ require("express-async-errors");
 
 	//CORS
 
-	app.all("/personagens", (req, res, next) => {
+	app.all("/*", (req, res, next) => {
 		res.header("Access-Control-Allow-Origin", "*");
 
 		res.header("Access-Control-Allow-Methods", "GET");
