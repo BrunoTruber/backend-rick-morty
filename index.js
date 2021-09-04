@@ -1,9 +1,10 @@
-const express = require("express");
-const mongodb = require("mongodb");
+const express = require('express');
+const mongodb = require('mongodb');
 const ObjectId = mongodb.ObjectId;
-require("dotenv").config();
-require("express-async-errors");
-
+require('dotenv').config();
+require('express-async-errors');
+//requires de endpoints
+const home = require("./components/home/home");
 
 (async () => {
 	const dbUser = process.env.DB_USER;
@@ -28,17 +29,17 @@ require("express-async-errors");
 	const db = client.db("blue_db");
 	const personagens = db.collection("personagens");
 
-	const getPersonagensValidas = () => personagens.find({}).toArray();
+	const getPersonagensValidos = () => personagens.find({}).toArray();
 
 	const getPersonagemById = async (id) =>
 		personagens.findOne({ _id: ObjectId(id) });
 
 	//CORS
 
-	app.all("/personagens", (req, res, next) => {
+	app.all("/*", (req, res, next) => {
 		res.header("Access-Control-Allow-Origin", "*");
 
-		res.header("Access-Control-Allow-Methods", "GET");
+		res.header("Access-Control-Allow-Methods", "*");
 
 		res.header(
 			"Access-Control-Allow-Headers",
@@ -54,7 +55,7 @@ require("express-async-errors");
 	//[GET] GetAllPersonagens
 
 	app.get("/personagens", async (req, res) => {
-		res.send(await getPersonagensValidas());
+		res.send(await getPersonagensValidos());
 	});
 
 	//[GET] getPersonagemById
