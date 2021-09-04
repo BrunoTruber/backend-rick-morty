@@ -141,7 +141,7 @@ require("express-async-errors");
 		//checa se existe o personagem solicitado
 		if(quantidadePersonagens !==1){
 			res.status(404).send({error: 'personagem nao encontrado'})
-		
+			return;
 		}
 		//dleta personagem
 		const result = await personagens.deleteOne({
@@ -155,26 +155,22 @@ require("express-async-errors");
 
 		res.send(204);
 
-
 	});
-	//Tratamento de erros
-	//Middleware verificar endpoints
+	//tratamento de erros
+	//middleware verifica end points
 	app.all("*", function (req, res) {
 		res.status(404).send({ message: "Endpoint was not found" });
 	});
 
-	//Middleware -> Tratamento de erro
+	//middleware - Tratamento de erro
 	app.use((error, req, res, next) => {
 		res.status(error.status || 500).send({
 			error: {
 				status: error.status || 500,
-				message: error.message || "Internal Server Error",
+				message: error.message || "internal server Error",
 			},
 		});
 	});
-
-
-
 
 
 	app.listen(port, () => {
