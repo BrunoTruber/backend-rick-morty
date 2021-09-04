@@ -63,6 +63,10 @@ require("express-async-errors");
 	app.get("/personagens/:id", async (req, res) => {
 		const id = req.params.id;
 		const personagem = await getPersonagemById(id);
+		if(!personagem){
+			res.status(404).send({error: 'o persoangem especificado nao foi encontrado'});
+			return;
+		}
 		res.send(personagem);
 	});
     
