@@ -47,7 +47,7 @@ const home = require("./components/home/home");
 		);
 		next();
 	});
-
+	//[GET] - Home
 	app.get("/", async (req, res) => {
 		res.send({ info: "Olá, Blue" });
 	});
