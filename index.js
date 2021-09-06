@@ -38,7 +38,8 @@ const home = require("./components/home/home");
 
 	app.all("/*", (req, res, next) => {
 		res.header(
-			"Access-Control-Allow-Origin", "*"
+			"Access-Control-Allow-Origin", "*",
+			"http://backend-rick-morty-bruno.herokuapp.com"
 			);
 
 		res.header("Access-Control-Allow-Methods", "*");
