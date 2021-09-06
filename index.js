@@ -3,6 +3,7 @@ const mongodb = require('mongodb');
 const ObjectId = mongodb.ObjectId;
 require('dotenv').config();
 require('express-async-errors');
+var cors = require('cors');
 //requires de endpoints
 const home = require("./components/home/home");
 
@@ -48,6 +49,13 @@ const home = require("./components/home/home");
 	// 	);
 	// 	next();
 	// });
+
+// cors novo
+// liberar o cors em todas as requisições
+app.use(cors());
+//ativar todos os pre-flights
+app.options('*', cors());
+
 	//[GET] - Home
 	app.get("/", async (req, res) => {
 		res.send({ info: "Olá, Blue" });
