@@ -5,12 +5,12 @@ require('dotenv').config();
 require('express-async-errors');
 var cors = require('cors');
 //requires de endpoints
-const home = require("./components/home/home");
-// const read_all = require("./components/read-all/read-all");
-// const read_By_Id = require("./components/read-by-id/read-by-id")
-const update = require("./components/update/update");
-const create = require("./components/create/create");
-const deletar = require("./components/delete/delete");
+// const home = require("./components/home/home");
+// // const read_all = require("./components/read-all/read-all");
+// // const read_By_Id = require("./components/read-by-id/read-by-id")
+// const update = require("./components/update/update");
+// const create = require("./components/create/create");
+// const deletar = require("./components/delete/delete");
 
 (async () => {
 	const dbUser = process.env.DB_USER;
@@ -66,10 +66,10 @@ app.options('*', cors());
 
 
 	// //[GET] - Home
-	// app.get("/", async (req, res) => {
-	// 	res.send({ info: "Olá, Blue" });
-	// });
-	app.use('/home', home);
+	app.get("/", async (req, res) => {
+		res.send({ info: "Olá, Blue" });
+	});
+	// app.use('/home', home);
 
 	//[GET] GetAllPersonagens
 	app.get("/personagens", async (req, res) => {
