@@ -72,13 +72,11 @@ app.options('*', cors());
 	app.use('/home', home);
 
 	//[GET] GetAllPersonagens
-
 	app.get("/personagens", async (req, res) => {
 		res.send(await getPersonagensValidos());
 	});
 
 	//[GET] getPersonagemById
-
 	app.get("/personagens/:id", async (req, res) => {
 		const id = req.params.id;
 		const personagem = await getPersonagemById(id);
