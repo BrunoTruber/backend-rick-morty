@@ -6,11 +6,11 @@ require("express-async-errors");
 var cors = require('cors');
 
 //requires de endpoints
-const home = require("./components/home/home");
+//const home = require("./components/home/home");
 // // const read_all = require("./components/read-all/read-all");
-const readById = require("./components/read-by-id/read-by-id");
+//const readById = require("./components/read-by-id/read-by-id");
 // const update = require("./components/update/update");
-const create = require("./components/create/create");
+//const create = require("./components/create/create");
 // const deletar = require("./components/delete/delete");
 
 (async () => {
@@ -77,16 +77,16 @@ app.options('*', cors());
 	});
 
 	//[GET] getPersonagemById
-	// app.get("/personagens/:id", async (req, res) => {
-	// 	const id = req.params.id;
-	// 	const personagem = await getPersonagemById(id);
-	// 	if(!personagem){
-	// 		res.status(404).send({error: "o persoangem especificado nao foi encontrado"});
-	// 		return;
-	// 	}
-	// 	res.send(personagem);
-	// });
-	 app.use("/personagens/read-by-id", readById);
+	app.get("/personagens/:id", async (req, res) => {
+		const id = req.params.id;
+		const personagem = await getPersonagemById(id);
+		if(!personagem){
+			res.status(404).send({error: "o persoangem especificado nao foi encontrado"});
+			return;
+		}
+		res.send(personagem);
+	});
+	//  app.use("/personagens/read-by-id", readById);
     
     // [POST] postPersonagem - criar personagenm
 	app.post("/personagens", async (req, res) => {
