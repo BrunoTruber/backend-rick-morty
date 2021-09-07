@@ -7,7 +7,7 @@ var cors = require('cors');
 
 //requires de endpoints
 const home = require("./components/home/home");
-// // const read_all = require("./components/read-all/read-all");
+//const read_all = require("./components/read-all/read-all");
 //const readById = require("./components/read-by-id/read-by-id");
 // const update = require("./components/update/update");
 //const create = require("./components/create/create");
