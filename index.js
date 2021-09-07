@@ -6,6 +6,11 @@ require('express-async-errors');
 var cors = require('cors');
 //requires de endpoints
 const home = require("./components/home/home");
+// const read_all = require("./components/read-all/read-all");
+// const read_By_Id = require("./components/read-by-id/read-by-id")
+const update = require("./components/update/update");
+const create = require("./components/create/create");
+const deletar = require("./components/delete/delete");
 
 (async () => {
 	const dbUser = process.env.DB_USER;
@@ -35,6 +40,8 @@ const home = require("./components/home/home");
 	const getPersonagemById = async (id) =>
 		personagens.findOne({ _id: ObjectId(id) });
 
+	
+
 	//CORS
 
 	// app.all("/*", (req, res, next) => {
@@ -50,16 +57,19 @@ const home = require("./components/home/home");
 	// 	next();
 	// });
 
+
 // cors novo
 // liberar o cors em todas as requisições
 app.use(cors());
 //ativar todos os pre-flights
 app.options('*', cors());
 
-	//[GET] - Home
-	app.get("/", async (req, res) => {
-		res.send({ info: "Olá, Blue" });
-	});
+
+	// //[GET] - Home
+	// app.get("/", async (req, res) => {
+	// 	res.send({ info: "Olá, Blue" });
+	// });
+	app.use('/home', home);
 
 	//[GET] GetAllPersonagens
 
@@ -78,6 +88,7 @@ app.options('*', cors());
 		}
 		res.send(personagem);
 	});
+	// app.use('/personagens/read-by-id', read_By_Id);
     
     // [POST] postPersonagem - criar personagenm
 	app.post("/personagens", async (req, res) => {
