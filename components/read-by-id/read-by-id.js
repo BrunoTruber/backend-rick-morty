@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const mongodb = require("mongodb");
 const ObjectId = mongodb.ObjectId;
-
 (async () => {
   const dbUser = process.env.DB_USER;
   const dbPassword = process.env.DB_PASSWORD;
@@ -27,7 +26,7 @@ const ObjectId = mongodb.ObjectId;
   });
 
 
-//[GET] getPersonagensById
+//[GET] GetPersonagensById
 
 router.get("/:id", async (req, res) => {
     const id = req.params.id;
