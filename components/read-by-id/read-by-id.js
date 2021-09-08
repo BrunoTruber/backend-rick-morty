@@ -40,7 +40,7 @@ router.get("/:id", async (req, res) => {
     }
     res.send(personagem);
   });
+  
 })();
   
-
 module.exports = router;
