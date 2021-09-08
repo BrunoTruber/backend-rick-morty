@@ -15,6 +15,7 @@ const ObjectId = mongodb.ObjectId;
 
   const db = client.db("blue_db");
   const personagens = db.collection("personagens");
+  const getPersonagensValidos = () => personagens.find({}).toArray();
 
   const getPersonagemById = async (id) =>
     personagens.findOne({ _id: ObjectId(id) });
